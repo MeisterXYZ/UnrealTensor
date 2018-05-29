@@ -11,3 +11,5 @@ Beispiel:
     
 Bauen:
     clang -o create_run_csv main.cpp
+Mac:
+    clang++ -o create_run_csv create_run_csv.cpp

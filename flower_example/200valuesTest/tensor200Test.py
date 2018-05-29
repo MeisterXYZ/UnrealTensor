@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
+import sys
 import os
 import matplotlib.pyplot as plt
 
@@ -12,7 +13,14 @@ print("TensorFlow version: {}".format(tf.VERSION))
 print("Eager execution: {}".format(tf.executing_eagerly()))
 
 #load the local flower csv
-train_dataset_fp = os.getcwd()+'/one.csv'
+try:
+    sys.argv[1]
+except IndexError:
+    raise FileNotFoundError('Enter Filename for Training-Data-CSV!')
+
+trainingDataFilename = sys.argv[1]
+train_dataset_fp = os.getcwd()+'/'+trainingDataFilename
+
 
 #prepare train data set
 def parse_csv(line):
@@ -147,3 +155,27 @@ for epoch in range(num_epochs):
     print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
                                                                 epoch_loss_avg.result(),
                                                                 epoch_accuracy.result()))
+
+#read the test Data
+try:
+    sys.argv[2]
+except IndexError:
+    raise FileNotFoundError('Enter Filename for Test-Data-CSV!')
+testDataFilename = sys.argv[1]
+test_fp = os.getcwd()+'/'+ testDataFilename
+
+test_dataset = tf.data.TextLineDataset(test_fp)
+test_dataset = test_dataset.skip(1)             # skip header row
+test_dataset = test_dataset.map(parse_csv)      # parse each row with the funcition created earlier
+test_dataset = test_dataset.shuffle(1000)       # randomize
+test_dataset = test_dataset.batch(32)           # use the same batch size as the training set
+
+
+#evaluate the model
+test_accuracy = tfe.metrics.Accuracy()
+
+for (x, y) in test_dataset:
+  prediction = tf.argmax(model(x), axis=1, output_type=tf.int32)
+  test_accuracy(prediction, y)
+
+print("Test set accuracy: {:.3%}".format(test_accuracy.result()))
