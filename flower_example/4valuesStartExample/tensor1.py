@@ -106,3 +106,22 @@ for epoch in range(num_epochs):
     print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
                                                                 epoch_loss_avg.result(),
                                                                 epoch_accuracy.result()))
+
+#read the test Data
+test_fp = os.getcwd()+'/testData.csv'
+
+test_dataset = tf.data.TextLineDataset(test_fp)
+test_dataset = test_dataset.skip(1)             # skip header row
+test_dataset = test_dataset.map(parse_csv)      # parse each row with the funcition created earlier
+test_dataset = test_dataset.shuffle(1000)       # randomize
+test_dataset = test_dataset.batch(32)           # use the same batch size as the training set
+
+
+#evaluate the model
+test_accuracy = tfe.metrics.Accuracy()
+
+for (x, y) in test_dataset:
+  prediction = tf.argmax(model(x), axis=1, output_type=tf.int32)
+  test_accuracy(prediction, y)
+
+print("Test set accuracy: {:.3%}".format(test_accuracy.result()))
