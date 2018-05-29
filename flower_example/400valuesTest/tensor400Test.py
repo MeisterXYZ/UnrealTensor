@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
+import sys
 import os
 import matplotlib.pyplot as plt
 
@@ -12,7 +13,14 @@ print("TensorFlow version: {}".format(tf.VERSION))
 print("Eager execution: {}".format(tf.executing_eagerly()))
 
 #load the local flower csv
-train_dataset_fp = os.getcwd()+'/one.csv'
+try:
+    sys.argv[1]
+except IndexError:
+    raise FileNotFoundError('Enter Filename for Training-Data-CSV!')
+
+trainingDataFilename = sys.argv[1]
+train_dataset_fp = os.getcwd()+'/'+trainingDataFilename
+
 
 #prepare train data set
 def parse_csv(line):
