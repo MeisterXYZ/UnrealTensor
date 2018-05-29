@@ -1,0 +1,45 @@
+body {
+    background-color: gray;
+}
+
+div#main {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(59, 17, 17);
+}
+
+div#l1{
+    position: relative;
+    top: -100%;
+    left: -100%;
+    width: 64px;
+    height: 64px;
+    background-color: rgb(117, 117, 100);
+}
+
+div#l2{
+    position: relative;
+    top:25%;
+    left:25%;
+    width: 32px;
+    height: 32px;
+    background-color: rgb(116, 116, 47);
+}
+
+div#l3{
+    position: relative;
+    top:25%;
+    left:25%;
+    width: 16px;
+    height: 16px;
+    background-color: rgb(153, 153, 10);
+}
+
+div#target{
+    position: relative;
+    top:25%;
+    left:25%;
+    width: 8px;
+    height: 8px;
+    background-color: yellow;
+} 
