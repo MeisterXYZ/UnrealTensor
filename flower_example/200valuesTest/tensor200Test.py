@@ -67,10 +67,10 @@ try:
     sys.argv[2]
 except IndexError:
     raise FileNotFoundError(missingParMsg)
-try:
-    sys.argv[3]
-except IndexError:
-    raise FileNotFoundError(missingParMsg)
+#try:
+#    sys.argv[3]
+#except IndexError:
+#    raise FileNotFoundError(missingParMsg)
 
 
 #IMPORT THE DATA
@@ -93,12 +93,12 @@ test_dataset = test_dataset.batch(32)           # use the same batch size as the
 print('competed reading Test-Data')
 
 #read the predict Data
-predDataFilename = sys.argv[3]
-pred_fp  = os.getcwd()+'/'+ predDataFilename
-predict_dataset  = tf.data.TextLineDataset(pred_fp)
-predict_dataset  = predict_dataset.map(parse_csv)      # parse each row with the funcition created earlier
-predict_dataset = predict_dataset.batch(32)           # use the same batch size as the training set
-print('competed reading Prediction-Data')
+#predDataFilename = sys.argv[3]
+#pred_fp  = os.getcwd()+'/'+ predDataFilename
+#predict_dataset  = tf.data.TextLineDataset(pred_fp)
+#predict_dataset  = predict_dataset.map(parse_csv)      # parse each row with the funcition created earlier
+#predict_dataset = predict_dataset.batch(32)           # use the same batch size as the training set
+#print('competed reading Prediction-Data')
 
 
 #DEFINING THE MODEL OF THE NETWORK
@@ -110,7 +110,7 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(400, activation="relu", input_shape=(200,)),  # input shape required
     tf.keras.layers.Dense(400, activation="relu"),
     #creating a output layers, use softmax in last layer to represent probabilities 
-    tf.keras.layers.Dense(2, activation="softmax")
+    tf.keras.layers.Dense(3, activation="softmax")
 ])
 print('crated model network.')
 
@@ -164,11 +164,12 @@ print("Test set accuracy: {:.3%}".format(test_accuracy.result()))
 
 
 #PREDICTION
-class_ids = ["raph", "dennis"]
-
-for x, y in predict_dataset:
-  #just use the 200 values, reject the seted label 
-  predictions = model(x)
-  #print results for every Run-part
-  for idx,val in enumerate(predictions.numpy()):
-    print("Prediction for Run-part {} ==> {}::   Raph:{:.3%}%, Dennis:{:.3%}%".format(idx,class_ids[tf.argmax(val).numpy() ] ,val[0],val[1]))
+#class_ids = ["raph", "dennis"]
+#
+#for x, y in predict_dataset:
+#  #just use the 200 values, reject the seted label 
+#  predictions = model(x)
+#  #print results for every Run-part
+#  for idx,val in enumerate(predictions.numpy()):
+#    print("Prediction for Run-part {} ==> {}::   Raph:{:.3%}%, Dennis:{:.3%}%".format(idx,class_ids[tf.argmax(val).numpy() ] ,val[0],val[1]))
+#
