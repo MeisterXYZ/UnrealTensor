@@ -54,8 +54,8 @@ def grad(model, inputs, targets):
 #initialize
 tf.enable_eager_execution()
 #Print that import is done and tf is ready
-print("TensorFlow version: {}".format(tf.VERSION))
-print("Eager execution: {}".format(tf.executing_eagerly()))
+#print("TensorFlow version: {}".format(tf.VERSION))
+#print("Eager execution: {}".format(tf.executing_eagerly()))
 
 #Error handling for missing Dataset-Files
 missingParMsg ='\nEnter Filename for Training, Test, and Prediction-Dataset-CSV!\n To run the script command:\n python tensor200Test.py trainingDataFile.csv testDataFile.csv predictionDataFile.csv' 
@@ -81,7 +81,7 @@ train_dataset = tf.data.TextLineDataset(train_dataset_fp)
 train_dataset = train_dataset.map(parse_csv)      # parse each row
 train_dataset = train_dataset.shuffle(buffer_size=1000)  # randomize
 train_dataset = train_dataset.batch(32)
-print('competed reading Training-Data')
+#print('competed reading Training-Data')
 
 #read the test Data
 testDataFilename = sys.argv[2]
@@ -90,7 +90,7 @@ test_dataset = tf.data.TextLineDataset(test_fp)
 test_dataset = test_dataset.map(parse_csv)      # parse each row with the funcition created earlier
 test_dataset = test_dataset.shuffle(1000)       # randomize
 test_dataset = test_dataset.batch(32)           # use the same batch size as the training set
-print('competed reading Test-Data')
+#print('competed reading Test-Data')
 
 #read the predict Data
 #predDataFilename = sys.argv[3]
@@ -112,7 +112,7 @@ model = tf.keras.Sequential([
     #creating a output layers, use softmax in last layer to represent probabilities 
     tf.keras.layers.Dense(3, activation="softmax")
 ])
-print('crated model network.')
+#print('crated model network.')
 
 
 #TRAIN THE NETWORK
