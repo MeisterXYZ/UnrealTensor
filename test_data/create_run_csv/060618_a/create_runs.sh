@@ -1,4 +1,4 @@
-runseq_size=200
+runseq_size=500
 
 training_runs_start=0
 training_runs_end=4
