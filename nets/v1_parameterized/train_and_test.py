@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 import tensorflow.contrib.eager as tfe
 
+# Disable AVX warning
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 #function for prepareing the train,test and prediction-data sets
