@@ -146,10 +146,10 @@ for epoch in range(num_epochs):
   train_accuracy_results.append(epoch_accuracy.result())
 
   #print progress
-  #if epoch % 10 == 0:
-  #  print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
-  #                                                              epoch_loss_avg.result(),
-  #                                                              epoch_accuracy.result()))
+  if epoch % 10 == 0:
+    print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
+                                                                epoch_loss_avg.result(),
+                                                                epoch_accuracy.result()))
 
 
 #EVALUATE THE MODEL
@@ -160,6 +160,7 @@ for (x, y) in test_dataset:
   test_accuracy(prediction, y)
 print("Layer 1 neurons: {}".format(sys.argv[3]))
 print("Layer 2 neurons: {}".format(sys.argv[4]))
+print("Layer 2 neurons: {}".format(sys.argv[5]))
 print("Test set accuracy: {:.3%}".format(test_accuracy.result()))
 
 
