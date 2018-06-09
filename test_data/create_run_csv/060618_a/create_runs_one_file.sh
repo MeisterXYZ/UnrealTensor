@@ -1,8 +1,8 @@
 runseq_size=200
 
 runs_start=0
-runs_end=7
-csv_name="data_"$runseq_size".csv"
+runs_end=6
+csv_name="data__"$runseq_size".csv"
 
 names=("Raphael" "Dennis" "Carsten")
 labels=(0 1 2)
