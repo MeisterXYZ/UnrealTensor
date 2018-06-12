@@ -183,6 +183,10 @@ print("Test set accuracy: {:.3%}".format(test_accuracy.result()))
 # --------------------------------------------------------------------------------
 # PREDICTION
 
+print()
+print("Press Enter for predicitions")
+input()
+
 for x, y in predict_dataset:
   #just use the values, reject the seted label 
   predictions = model(x)
